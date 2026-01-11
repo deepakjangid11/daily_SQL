@@ -1,0 +1,90 @@
+ -- 1.get the country name its population , and the language spoken with the percentage of each language 
+show tables;
+select * from countrylanguage;
+
+select c.name , c.population , cl.language ,cl.percentage from country as c
+join countrylanguage as cl on c.code = cl.countrycode;
+
+-- join question:-
+describe country;
+select * from city;
+-- 1.Find the city name along with the country name.
+select ct.name , c.name from city as ct join country as c on c.code = ct.countrycode;
+
+-- 2.Find each city’s population with its country’s government form.
+select ct.name , ct.population ,c.governmentform from 
+city as ct join country as c on ct.countrycode = c.code;
+
+-- 3.List all cities with the continent they belong to.
+select ct.name ,c.continent from city as ct join country as c on ct.countrycode = c.code;
+
+-- 4.Find the official languages spoken in each country.
+select c.name , cl.language from country as c join countrylanguage as cl on cl.countrycode = c.code;
+
+-- 5.Show all cities with the Head of State of their country.
+select ct.name , c.headofstate , c.name from city as ct join country as c on ct.countrycode = c.code
+order by c.name,c.headofstate;
+
+-- 6.Find all cities whose country population is more than 50 million.
+select ct.name , c.name , ct.population from city as ct
+join
+country as c on ct.countrycode = c.code where c.population > 50000000;
+
+-- 6.List the capital city name along with its country name.
+select c.name,ct.name
+from country as c join
+city as ct
+on 
+c.capital = ct.id;
+
+-- 7 Find the region of each city’s country.
+select ct.name, c.name, c.region from country as c join city as ct
+on c.code = ct.countrycode;
+
+-- 8.Show cities along with the independence year of their country.
+select ct.name ,c.name, c.indepyear from country as c join city as ct on c.code = ct.countrycode;
+
+-- 9. Find all cities and their country’s life expectancy.
+select ct.name, c.name , c.lifeexpectancy from country as c join city as ct on c.code = ct.countrycode;
+
+-- 10.Show all cities located in countries where English is an official language.
+select ct.name ,c.name ,cl.language from country as c join city as ct 
+on ct.countrycode = c.code 
+join countrylanguage as cl on c.code = cl.countrycode where cl.language = 'english';
+
+-- 11.List cities located in Asian continent countries.
+select ct.name , c.name , c.continent from country as c join
+ city as ct on c.code = ct.countrycode where c.continent = 'asia';
+ 
+ -- 12.Show each city and its country’s surface area.
+ select ct.name , c.name ,c.surfacearea from country as c join 
+city as ct on c.code = ct.countrycode;
+
+-- 13. Find languages spoken in the country of each city
+select ct.name , cl.language , c.name from country as c join city as ct on c.code = ct.countrycode 
+join countrylanguage as cl on ct.countrycode = cl.countrycode;
+
+-- 14.List cities of countries where GNP is above 100,000.
+select ct.name ,c.name , c.gnp from country as c join city as ct on c.code = ct.countrycode where c.gnp > 1000000;
+
+-- 15.Find all cities with their country’s capital population.
+select ct.name , c.name , ct.population from country as c join city as ct on ct.id = c.capital;
+
+-- 16.Show cities belonging to countries where Spanish is spoken.
+select c.name , ct.name , cl.language from country as c join city as ct on c.code = ct.countrycode
+join countrylanguage as cl on ct.countrycode = cl.countrycode where cl.language = 'spanish';
+
+-- 17.Show all cities with their country’s GNP old value.
+select ct.name , c.name , c.gnpold from country as c join city as ct on c.code = ct.countrycode;
+
+-- 18.Show cities in countries where government form includes “Monarchy”.
+select ct.name , c.governmentform , c.name from country as c join 
+city as ct on c.code = ct.countrycode where c.governmentform = 'Monarchy';
+
+-- 19.Find cities in countries where life expectancy is greater than 70.
+select ct.name , c.name ,c.lifeexpectancy from country as c join
+city as ct on c.code = ct.countrycode where c.lifeexpectancy > 70;
+
+-- 20.List cities along with their country code2 value.
+select ct.name , c.name , c.code2 from country as c join city as ct 
+on c.code = ct.countrycode;
